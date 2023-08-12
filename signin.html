@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/sign_in_up.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        /* Add custom CSS for the floating home button */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            font-size: 26px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-img">
+        <div class="content">
+            <a href="index.html" class="home-button"><i class="fas fa-home"></i></a> 
+            <header>Sign In</header>
+            <form action="#">
+                <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="text" required placeholder="Username " id="lUsername">
+                </div>
+                <div class="field space">
+                    <span class="fa fa-lock"></span>
+                    <input type="password" class="pass-key" required placeholder="Password" id="lPw">
+                    <span class="show">SHOW</span>
+                </div>
+                <div class="pass">
+                    <a id="clickMe" href="#">Forgot Password?</a>
+
+                    <script>
+                        // Function to handle the click event
+                        function showAlert() {
+                            alert("Need assistance, contact website admin.");
+                        }
+                
+                        document.getElementById("clickMe").addEventListener("click", showAlert);
+                    </script>
+                </div>
+                <div class="field">
+                    <input type="submit" value="SIGN IN" id="lSubmit">
+                </div>
+            </form>
+            <div class="signin">
+                or Sign In with</div>
+            <div class="links">
+                <div class="facebook">
+                    <i class="fab fa-facebook-f"><span>Facebook</span></i>
+                </div>
+                <div class="instagram">
+                    <i class="fab fa-instagram"><span>Instagram</span></i>
+                </div>
+            </div>
+            <div class="signup">
+                Don't have account?
+                <a href="singup.html">Signup Now</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module">
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB2DsnszRVxELIyqSqQdEJ_06DgOpvheeg", 
+            authDomain: "artstore-560f2.firebaseapp.com",
+            projectId: "artstore-560f2",
+            storageBucket: "artstore-560f2.appspot.com",
+            messagingSenderId: "66945441858",
+            appId: "1:66945441858:web:390903dced1d8b75268ddb"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const db = getDatabase(app);
+
+
+        document.getElementById("lSubmit").addEventListener('click', async function(e) {
+        e.preventDefault();
+        const lUsername = document.getElementById("lUsername").value.trim();
+        const lPw = document.getElementById("lPw").value;
+
+        if (lUsername === "" || lPw === "") {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        try {
+            const userSnapshot = await get(ref(db, 'user/' + lUsername));
+            const user = userSnapshot.val();
+
+            if (user && user.password === lPw) {
+                alert("Login Successful!");
+                window.location.href = "index.html";
+            
+            } else {
+                alert("Invalid username or password.");
+            }
+        } catch (error) {
+            alert("error");
+        }
+
+    });
+</script>
+    
+
+</body>
+
+</html>

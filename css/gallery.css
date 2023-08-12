@@ -1,0 +1,181 @@
+.container {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 35px;
+    position: relative;
+    margin: 40px 0;
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    background-color: rgba(220, 20, 60, 0);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: animate 4s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        width: 100px;
+    }
+    50% {
+        width: 200px;
+    }
+    100% {
+        width: 100px;
+    }
+}
+
+.top-content {
+    background-color: white;
+    width: 90%;
+    margin: 0 auto 20px auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px lightgray;
+}
+
+h3 {
+    height: 100%;
+    background-image: url("../resources/bg1.jpg");
+    line-height: 60px;
+    padding: 0 50px;
+    color: white;
+}
+
+label {
+    display: inline-block;
+    height: 100%;
+    padding: 0 5px;
+    margin: 0 20px;
+    line-height: 60px;
+    font-size: 18px;
+    color: gray;
+    cursor: pointer;
+    transition: color .6s;
+}
+
+label:hover {
+    color: black;
+}
+
+.photo-gallery {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.art {
+    position: relative;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px lightgray;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.art img {
+    width: 100%;
+    height: 100;
+    border-radius: 10px;
+    transition: .5s;
+}
+
+.art::before {
+    content: "Like \2764  | Bid Now \0024";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 22px;
+    width: 100%;
+    margin-top: -100px;
+    opacity: 0;
+    transition: .3s;
+    transition-delay: .2s;
+    z-index: 1;
+}
+
+.art::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    height: 0;
+    background-color: rgba(0, 0, 0, .4);
+    transition: .3s;
+}
+
+.art:hover::after {
+    height: 100%;
+}
+
+.art:hover::before {
+    margin-top: 0;
+    opacity: 1;
+}
+
+#check1:checked~.container .photo-gallery .art {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    transition: .5s;
+}
+
+#check2:checked~.container .photo-gallery .b {
+    transform: scale(1);
+    opacity: 1;
+    position: relative;
+    transition: 0.5s;
+}
+
+#check2:checked~.container .photo-gallery .c,
+#check2:checked~.container .photo-gallery .a {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0s;
+}
+
+#check3:checked~.container .photo-gallery .c {
+    transform: scale(1);
+    opacity: 1;
+    position: relative;
+}
+
+#check3:checked~.container .photo-gallery .b,
+#check3:checked~.container .photo-gallery .a {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0s;
+}
+
+#check4:checked~.container .photo-gallery .a {
+    transform: scale(1);
+    opacity: 1;
+    position: relative;
+}
+
+#check4:checked~.container .photo-gallery .b,
+#check4:checked~.container .photo-gallery .c {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0s;
+}

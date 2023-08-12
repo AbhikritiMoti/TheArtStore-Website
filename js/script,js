@@ -1,0 +1,30 @@
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+  import { getDatabase, ref , set, get, child } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB2DsnszRVxELIyqSqQdEJ_06DgOpvheeg",
+    authDomain: "artstore-560f2.firebaseapp.com",
+    projectId: "artstore-560f2",
+    storageBucket: "artstore-560f2.appspot.com",
+    messagingSenderId: "66945441858",
+    appId: "1:66945441858:web:390903dced1d8b75268ddb"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+    const db= getDatabase(app);
+    document.getElementById("submit").addEventListener("click",function(e){
+        set(ref(db, 'user/' + document.getElementById("name").value),
+        {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            pw: document.getElementById("[pw]").value,
+
+        });
+        alert("success")
+    })
