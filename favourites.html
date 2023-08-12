@@ -60,9 +60,10 @@
 
     <div class="container">
         <h1>BROWSE ART BY MOST LIKED</h1>
+        
         <div class="top-content">
             <h3>Favourites</h3>
-            <label for="check1">Most Viewed</label>
+            <label for="check1" class="selected-label">All photos</label>
         </div>
         <div class="photo-gallery">
 
@@ -126,6 +127,20 @@
 
     <!-- scroll up button -->
     <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i> </a>
+
+    <script>
+        const labels = document.querySelectorAll('.top-content label');
+
+        labels.forEach(label => {
+            label.addEventListener('click', () => {
+                // Remove 'selected-label' class from all labels
+                labels.forEach(lbl => lbl.classList.remove('selected-label'));
+
+                // Add 'selected-label' class to the clicked label
+                label.classList.add('selected-label');
+            });
+        });
+    </script>
 </body>
 
 </body>

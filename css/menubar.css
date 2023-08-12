@@ -1,6 +1,6 @@
 * {
     margin: 0;
-    padding: 1px;
+    padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
@@ -12,7 +12,7 @@ html {
 #logo {
     margin: 10px 34px;
     border-radius: 5px;
-    box-shadow: 0 0 5px #ffffff, 0 0 10px #000000;
+    box-shadow: 0 0 30px #ffffff, 0 0 30px #000000;
 }
 
 #logo img {
@@ -40,6 +40,7 @@ body {
 }
 
 .menu-bar ul li {
+    position: relative; /* Add this line for proper positioning of sub-menu */
     width: 178px;
     margin: 15px;
     padding: 15px;
@@ -51,7 +52,6 @@ body {
     display: block;
     padding: 3px 3px;
     border-radius: 20px;
-    text-decoration: none;
 }
 
 .menu-bar ul li a:hover {
@@ -73,30 +73,33 @@ body {
 }
 
 .sub-menu-1 {
+    
     display: none;
+    position: absolute;
+    top: 100%; /* Position below the parent menu item */
+    left: 0;
+    background-image: url("../resources/bg1.jpg");
+    border-radius: 10px;
+    z-index: 2; /* Ensure the dropdown appears above other elements */
+    border: 1px solid black; /* Add a border */
+    border-radius: 8px;
 }
 
 .menu-bar ul li:hover .sub-menu-1 {
     display: block;
-    position: absolute;
-    background-image: url("../resources/bg1.jpg");
-    margin-top: 16px;
-    margin-left: -18px;
-    border-radius: 10px;
 }
 
-.menu-bar ul li:hover .sub-menu-1 ul {
+.menu-bar ul li:hover.sub-menu-1 ul {
     display: block;
-    margin-top: -15px;
-    margin-top: 0px;
+    margin: 0;
 }
 
 .menu-bar ul li:hover .sub-menu-1 ul li {
     width: 150px;
     padding: 5px;
-    border-bottom: lpx dotted #fff;
     background: transparent;
-    border-radius: 100;
+    border-bottom: 1px dotted #fff;
+    border-radius: 10px; /* Fixed the value */
     text-align: left;
 }
 
@@ -104,6 +107,6 @@ body {
     border-bottom: none;
 }
 
-.menu-bar ul li:hover .sub-menu-1 ul li:hover a:hover {
+.menu-bar ul li:hover .sub-menu-1 ul li:hover a {
     color: rgb(0, 0, 0);
 }

@@ -68,17 +68,20 @@ footer {
 }
 
 .left .content .social {
+    
     margin: 20px 0 0 0;
 }
 
 .left .content .social a {
+    color: #ffffff;
+
     padding: 0 2px;
 }
 
 .left .content .social a span {
     height: 40px;
     width: 40px;
-    background: #1a1a1a;
+    background: black;
     line-height: 40px;
     text-align: center;
     font-size: 18px;
@@ -87,7 +90,7 @@ footer {
 }
 
 .left .content .social a span:hover {
-    background: #ffffff;
+    background: #5c22ac;
 }
 
 .center .content .fas {
@@ -103,7 +106,7 @@ footer {
 }
 
 .center .content .fas:hover {
-    background: blue;
+    background: #5c22ac;
 }
 
 .center .content .text {
@@ -161,7 +164,9 @@ footer {
 }
 
 .right form .btn button:hover {
-    background: blue;
+    background: #5c22ac;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .bottom center {

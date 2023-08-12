@@ -22,6 +22,84 @@
         }
     </style>
 
+    
+
+    <script>
+            function searchImages() {
+                var searchTerm = document.getElementById("search").value.toLowerCase();
+                var photoGallery = document.querySelectorAll(".photo-gallery .art");
+            
+                photoGallery.forEach(function(artwork) {
+                    var imageName = artwork.querySelector("img").getAttribute("src").toLowerCase();
+            
+                    if (imageName.includes(searchTerm)) {
+                        artwork.style.display = "block";
+                    } else {
+                        artwork.style.display = "none";
+                    }
+                });
+                
+            }
+
+
+            function searchAndDisplaySuggestions() {
+                var searchTerm = document.getElementById("search").value.toLowerCase();
+                var photoGallery = document.querySelectorAll(".photo-gallery .art");
+                var suggestionsContainer = document.getElementById("search-suggestions");
+
+                suggestionsContainer.innerHTML = ""; // Clear previous suggestions
+
+                photoGallery.forEach(function(artwork) {
+                    var imageName = artwork.querySelector("img").getAttribute("src").toLowerCase();
+
+                    if (imageName.includes(searchTerm)) {
+                        artwork.style.display = "block";
+                        // Display image name as suggestion
+                        var suggestion = document.createElement("div");
+                        suggestion.classList.add("suggestion");
+                        suggestion.textContent = imageName.replace("resources/", "");
+                        suggestionsContainer.appendChild(suggestion);
+                    } else {
+                        artwork.style.display = "none";
+                    }
+                });
+            }
+
+
+            document.addEventListener("click", function(event) {
+                var clickedSuggestion = event.target.closest(".suggestion");
+
+                // Check if a suggestion was clicked
+                if (clickedSuggestion) {
+                    var suggestionText = clickedSuggestion.textContent;
+                    var searchTerm = suggestionText.trim().toLowerCase();
+                    
+                    var photoGallery = document.querySelectorAll(".photo-gallery .art");
+
+                    photoGallery.forEach(function(artwork) {
+                        var imageName = artwork.querySelector("img").getAttribute("src").toLowerCase();
+
+                        if (imageName.includes(searchTerm)) {
+                            artwork.style.display = "block";
+                        } else {
+                            artwork.style.display = "none";
+                        }
+                    });
+                } else {
+                    // Close the suggestion list when clicking outside of it
+                    var suggestionsContainer = document.getElementById("search-suggestions");
+                    var searchInput = document.getElementById("search");
+
+                    if (event.target !== searchInput && event.target !== suggestionsContainer) {
+                        suggestionsContainer.style.display = "none";
+                    }
+                }
+            });
+
+
+    </script>
+    
+
     <body>
         <!-- menubar -->
         <div class="menu-bar">
@@ -58,23 +136,28 @@
             </ul>
         </div>
         <br><br><br>
-        <br><br><br>
-        <br><br><br>
+        
 
+        
         <!-- Button -->
         <div class="click-button">
 
-            <button class="btn btn3">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <input type="text" name="search" id="search" placeholder="Search">
-        </button>
+            <button class="btn btn3" onclick="searchImages()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                
+                <input type="text" name="search" id="search" placeholder="Search" class="search-icon" oninput="searchAndDisplaySuggestions()">
+
+            </button>
+
+            
+            <div id="search-suggestions" class="search-suggestions"></div>
+            
             <button class="btn btn4"><a href="favourites.html">Favourites <i class="fa fa-heart" aria-hidden="true"></i></a></button>
             <button class="btn btn3"><a href="signin.html"> Sing In <i class="fa fa-user"
                     aria-hidden="true"></i></a></button>
             <button class="btn btn4"><a href="singup.html"> Sing Up <i class="fa fa-user-plus"
                     aria-hidden="true"></i></a></button>
         </div>
-
 
         <!-- Pics Like Instagram -->
         <input type="radio" name="Photos" id="check1" checked>
@@ -85,8 +168,8 @@
         <div class="container">
             <h1>TRENDING OF THE WEEK</h1>
             <div class="top-content">
-                <h3>By Popular Artists</h3>
-                <label for="check1">All photos</label>
+                <h3>Unleash Your Creativity:</h3>
+                <label for="check1" class="selected-label">All photos</label>
                 <label for="check2">Emerging Photography</label>
                 <label for="check3">Figurative Painting</label>
                 <label for="check4">Street Art</label>
@@ -145,6 +228,11 @@
                     <img src="resources/12.jpg" alt="">
                 </div>
 
+            </div>
+
+            <div id="imageModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="modalImage">
             </div>
         </div>
 
@@ -252,7 +340,15 @@
                                 <input type="email" required>
                             </div>
                             <div class="btn">
-                                <button type="submit">SUSCRIBE</button>
+                                <button type="submit" onclick="showAlert()">SUSCRIBE</button>
+                                <script>
+                                    // Function to handle the click event
+                                    function showAlert() {
+                                        alert("You have been subscribed.");
+                                    }
+                            
+                                    
+                                </script>
                             </div>
                         </form>
                     </div>
@@ -268,6 +364,49 @@
 
         <!-- scroll up button -->
         <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i> </a>
-    </body>
 
+
+
+        <script>
+            const labels = document.querySelectorAll('.top-content label');
+
+            labels.forEach(label => {
+                label.addEventListener('click', () => {
+                    // Remove 'selected-label' class from all labels
+                    labels.forEach(lbl => lbl.classList.remove('selected-label'));
+
+                    // Add 'selected-label' class to the clicked label
+                    label.classList.add('selected-label');
+                });
+            });
+
+
+
+            const artItems = document.querySelectorAll('.art');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeBtn = document.getElementsByClassName('close')[0];
+
+            artItems.forEach(artItem => {
+                artItem.addEventListener('click', () => {
+                    const imgSrc = artItem.querySelector('img').src;
+                    modalImage.src = imgSrc;
+                    modal.style.display = 'block';
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', event => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+
+        </script>
+
+    </body>
 </html>

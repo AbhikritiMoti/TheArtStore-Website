@@ -4,7 +4,7 @@
 }
 
 .btn {
-    border: 1px solid rgba(50, 33, 201, 0.747);
+    border: 1px solid #5c22ac;
     background: none;
     padding: 10px 66px;
     font-size: 20px;
@@ -87,7 +87,40 @@
 }
 
 .click-button a:hover {
-    color: rgba(50, 33, 201, 0.747);
+    color: black;
     background-color: transparent;
     text-decoration: none;
 }
+
+
+/* search*/
+.search-suggestions {
+    position: absolute;
+    width: 34.5%;
+    max-height: 120px; /* Limit the maximum height */
+    overflow-y: auto; /* Add scrolling when content overflows */
+    background-color: white;
+    border: 1px solid lightgray;
+    border-top: none;
+    z-index: 100;
+}
+
+.suggestion {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: rgb(119, 58, 191);
+}
+
+.search-input {
+    /* width: 500px; 
+    height: 0px; */
+}
+
+.search-icon {
+    margin-left: 10px;
+}
+
+
