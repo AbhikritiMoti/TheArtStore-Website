@@ -5,5 +5,4 @@
 
 
 
-https://github.com/AbhikritiMoti/TheArtStore-Website/assets/73769937/46693d45-2970-42cc-befa-050f51575c1d
 
